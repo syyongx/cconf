@@ -6,7 +6,7 @@ import (
 )
 
 func TestConf(t *testing.T) {
-	c := New(loadJSON)
+	c := New()
 	c.Load("./testdata/app.json")
 	name := c.GetString("name")
 	equal(t, "cconf", name)

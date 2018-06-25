@@ -4,10 +4,12 @@ import (
 	"strings"
 	"reflect"
 	"fmt"
+	"path/filepath"
 	"strconv"
 )
 
 var DefaultSeparator = "."
+var DefaultLoadFunc = loadJSON
 
 // ConfigKeyError describes a key which cannot be used to set a configuration value.
 type ConfigKeyError struct {
@@ -26,17 +28,15 @@ type loadFunc func(string, interface{}) error
 // Conf
 type Conf struct {
 	Separator string
+	LoadFunc  loadFunc
 	store     reflect.Value
-	types     map[string]reflect.Value
-	loadFunc  loadFunc
 }
 
 // New
-func New(lf loadFunc) *Conf {
+func New() *Conf {
 	return &Conf{
 		Separator: DefaultSeparator,
-		types:     make(map[string]reflect.Value),
-		loadFunc:  lf,
+		LoadFunc:  DefaultLoadFunc,
 	}
 }
 
@@ -177,12 +177,24 @@ func (c *Conf) SetStore(data ...interface{}) {
 func (c *Conf) Load(files ...string) error {
 	for _, file := range files {
 		var data interface{}
-		if err := c.loadFunc(file, &data); err != nil {
+		if err := c.LoadFunc(file, &data); err != nil {
 			return err
 		}
 		c.store = merge(c.store, reflect.ValueOf(data))
 	}
 	return nil
+}
+
+// LoadWithPattern loads configuration data from the names of all files matching pattern or nil.
+// if there is no matching file. The syntax of patterns is the same
+// as in Match. The pattern may describe hierarchical names such as
+// testdata/*.json (assuming the Separator is '/').
+func (c *Conf) LoadWithPattern(pattern string) error {
+	files, err := filepath.Glob(pattern)
+	if err != nil {
+		return err
+	}
+	return c.Load(files...)
 }
 
 // mapIndex
