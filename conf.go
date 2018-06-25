@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-const SEPARATOR = "."
+var DefaultSeparator = "."
 
 // ConfigKeyError describes a key which cannot be used to set a configuration value.
 type ConfigKeyError struct {
@@ -25,16 +25,18 @@ type loadFunc func(string, interface{}) error
 
 // Conf
 type Conf struct {
-	store    reflect.Value
-	types    map[string]reflect.Value
-	loadFunc loadFunc
+	Separator string
+	store     reflect.Value
+	types     map[string]reflect.Value
+	loadFunc  loadFunc
 }
 
 // New
 func New(lf loadFunc) *Conf {
 	return &Conf{
-		types:    make(map[string]reflect.Value),
-		loadFunc: lf,
+		Separator: DefaultSeparator,
+		types:     make(map[string]reflect.Value),
+		loadFunc:  lf,
 	}
 }
 
@@ -45,7 +47,7 @@ func (c *Conf) Get(key string, def ...interface{}) interface{} {
 		v = def[0]
 	}
 	store := c.store
-	segs := strings.Split(key, SEPARATOR)
+	segs := strings.Split(key, c.Separator)
 	length := len(segs)
 	for i := 0; i < length-1; i++ {
 		if store = getElement(store, segs[i]); !store.IsValid() {
