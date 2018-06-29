@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"path/filepath"
 	"strconv"
-	"sync"
 	"errors"
 )
 
@@ -23,7 +22,6 @@ type Conf struct {
 	types     map[string]reflect.Value
 	store     reflect.Value
 	cache     map[string]interface{}
-	mutex     sync.Mutex
 }
 
 // New
@@ -46,10 +44,10 @@ func (c *Conf) AddLoadFunc(typ string, fn loadFunc) {
 
 // Load loads configuration data from one or multiple files.
 func (c *Conf) Load(files ...string) error {
-	c.mutex.Lock()
-	defer c.mutex.Unlock()
-	// Reset cache.
-	c.cache = make(map[string]interface{})
+	defer func() {
+		// Reset cache.
+		c.cache = make(map[string]interface{})
+	}()
 	for _, file := range files {
 		typ := strings.TrimLeft(filepath.Ext(file), ".")
 		if fn, ok := c.LoadFuncs[typ]; ok {
@@ -79,13 +77,11 @@ func (c *Conf) LoadWithPattern(pattern string) error {
 
 // Set sets the configuration value at the specified path.
 func (c *Conf) Set(key string, val interface{}) error {
-	c.mutex.Lock()
-	defer c.mutex.Unlock()
 	if !c.store.IsValid() {
-		c.cache = make(map[string]interface{})
 		c.store = reflect.ValueOf(make(map[string]interface{}))
+		c.cache = make(map[string]interface{})
 	}
-	delete(c.cache, key)
+	defer delete(c.cache, key)
 
 	store := c.store
 	segs := strings.Split(key, c.Separator)
@@ -228,11 +224,11 @@ func (c *Conf) GetStore() interface{} {
 //
 // Note that this method will clear any existing configuration data.
 func (c *Conf) SetStore(data ...interface{}) {
-	c.cache = make(map[string]interface{})
 	c.store = reflect.Value{}
 	for _, d := range data {
 		c.store = merge(c.store, reflect.ValueOf(d))
 	}
+	c.cache = make(map[string]interface{})
 }
 
 // mapIndex
