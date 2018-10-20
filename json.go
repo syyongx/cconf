@@ -1,8 +1,8 @@
 package cconf
 
 import (
-	"io/ioutil"
 	"encoding/json"
+	"io/ioutil"
 )
 
 // load reads and parses a special format file.

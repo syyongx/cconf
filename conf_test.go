@@ -1,13 +1,13 @@
 package cconf
 
 import (
-	"testing"
 	"reflect"
+	"testing"
 )
 
 func TestConf(t *testing.T) {
 	c := New()
-	c.AddLoadFunc("json", loadJSON)
+	c.RegisterLoadFunc("json", loadJSON)
 	c.Load("./testdata/app.json")
 	name := c.GetString("name")
 	equal(t, "cconf", name)

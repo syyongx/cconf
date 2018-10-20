@@ -1,11 +1,11 @@
 package cconf
 
 import (
-	"reflect"
 	"fmt"
+	"reflect"
+	"runtime"
 	"strconv"
 	"strings"
-	"runtime"
 )
 
 // ConfigKeyError describes a key which cannot be used to set a configuration value.

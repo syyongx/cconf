@@ -21,7 +21,7 @@ Go 1.2 or above.
 ## Api
 ```
 New() *Conf
-AddLoadFunc(typ string, fn loadFunc)
+RegisterLoadFunc(typ string, fn loadFunc)
 ```
 
 ## Usage

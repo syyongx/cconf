@@ -1,12 +1,12 @@
 package cconf
 
 import (
-	"strings"
-	"reflect"
+	"errors"
 	"fmt"
 	"path/filepath"
+	"reflect"
 	"strconv"
-	"errors"
+	"strings"
 )
 
 // load file function
@@ -34,11 +34,11 @@ func New() *Conf {
 	}
 }
 
-// AddLoadFunc register load function.
+// RegisterLoadFunc register load function.
 // like:
-// AddLoadFunc("toml", loadTOML)
-// AddLoadFunc("yaml", loadYAML)
-func (c *Conf) AddLoadFunc(typ string, fn loadFunc) {
+// RegisterLoadFunc("toml", loadTOML)
+// RegisterLoadFunc("yaml", loadYAML)
+func (c *Conf) RegisterLoadFunc(typ string, fn loadFunc) {
 	c.LoadFuncs[typ] = fn
 }
 
@@ -72,6 +72,7 @@ func (c *Conf) LoadWithPattern(pattern string) error {
 	if err != nil {
 		return err
 	}
+	fmt.Println(files)
 	return c.Load(files...)
 }
 
