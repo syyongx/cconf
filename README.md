@@ -5,7 +5,7 @@
 [4]: LICENSE
 
 ## Introduction
-cconf is a Go package for handling configurations in Go applications. cconf references ozzo-config, but higher performance.
+CConf is a Go package for handling configurations in Go applications. cconf references ozzo-config, but higher performance.
 
 ## Download & Install
 ```shell
