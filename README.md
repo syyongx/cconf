@@ -19,7 +19,7 @@ go get github.com/syyongx/cconf
 Go 1.2 or above. 
  
 ## Apis
-```
+```go
 New() *Conf
 RegisterLoadFunc(typ string, fn loadFunc)
 Load(files ...string) error
@@ -38,7 +38,7 @@ GetStore() interface{}
 ```
 
 ## Usage
-```
+```go
 import github.com/syyongx/cconf
 
 func main() {
