@@ -22,6 +22,19 @@ Go 1.2 or above.
 ```
 New() *Conf
 RegisterLoadFunc(typ string, fn loadFunc)
+Load(files ...string) error
+LoadWithPattern(pattern string) error
+
+Set(key string, val interface{}) error
+Get(key string, def ...interface{}) interface{}
+GetString(key string, def ...string) string
+GetInt(key string, def ...int) int
+GetInt64(key string, def ...int64) int64
+GetFloat(key string, def ...float64) float64
+GetBool(key string, def ...bool) bool
+
+SetStore(data ...interface{})
+GetStore() interface{}
 ```
 
 ## Usage
