@@ -49,6 +49,9 @@ GetBool(key string, def ...bool) bool
 
 SetStore(data ...interface{})
 GetStore() interface{}
+
+Register(name string, provider interface{}) error
+Populate(v interface{}, key ...string) (err error)
 ```
 
 ## LICENSE
