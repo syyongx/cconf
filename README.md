@@ -17,6 +17,19 @@ go get github.com/syyongx/cconf
  
 ## Requirements
 Go 1.2 or above. 
+
+## Quick Start
+```go
+import github.com/syyongx/cconf
+
+func main() {
+    c := cconf.New()
+    age := c.GetInt("age", 18)
+    name := c.Get("name").(string)
+    c.Set("email", "default@default.com")
+    email := c.GetString("email")
+}
+```
  
 ## Apis
 ```go
@@ -35,19 +48,6 @@ GetBool(key string, def ...bool) bool
 
 SetStore(data ...interface{})
 GetStore() interface{}
-```
-
-## Quick Start
-```go
-import github.com/syyongx/cconf
-
-func main() {
-    c := cconf.New()
-    age := c.GetInt("age", 18)
-    name := c.Get("name").(string)
-    c.Set("email", "default@default.com")
-    email := c.GetString("email")
-}
 ```
 
 ## LICENSE
