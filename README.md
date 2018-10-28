@@ -13,7 +13,8 @@ go get github.com/syyongx/cconf
 ```
 
 ## Features
- 1. loading configuration file, default JSON.
+ 1. Loading configuration file, default JSON.
+ 1. Dynamic setting configuration.
  
 ## Requirements
 Go 1.2 or above. 
