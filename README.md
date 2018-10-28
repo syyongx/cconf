@@ -37,7 +37,7 @@ SetStore(data ...interface{})
 GetStore() interface{}
 ```
 
-## Usage
+## Quick Start
 ```go
 import github.com/syyongx/cconf
 
