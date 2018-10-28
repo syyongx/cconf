@@ -18,7 +18,7 @@ go get github.com/syyongx/cconf
 ## Requirements
 Go 1.2 or above. 
  
-## Api
+## Apis
 ```
 New() *Conf
 RegisterLoadFunc(typ string, fn loadFunc)
