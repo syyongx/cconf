@@ -72,7 +72,6 @@ func (c *Conf) LoadWithPattern(pattern string) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(files)
 	return c.Load(files...)
 }
 
