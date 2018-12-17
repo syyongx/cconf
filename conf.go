@@ -12,10 +12,12 @@ import (
 // load file function
 type loadFunc func(string, interface{}) error
 
+// DefaultSeparator default separator.
 var DefaultSeparator = "."
+// DefaultLoadFuncs default load functions.
 var DefaultLoadFuncs = map[string]loadFunc{"json": loadJSON}
 
-// Conf
+// Conf conf
 type Conf struct {
 	Separator string
 	LoadFuncs map[string]loadFunc
@@ -24,7 +26,7 @@ type Conf struct {
 	cache     map[string]interface{}
 }
 
-// New
+// New returns an instance of the Conf.
 func New() *Conf {
 	return &Conf{
 		Separator: DefaultSeparator,
@@ -160,7 +162,7 @@ func (c *Conf) Get(key string, def ...interface{}) interface{} {
 	return c.cache[key]
 }
 
-// GetString
+// GetString returns a string.
 func (c *Conf) GetString(key string, def ...string) string {
 	var v string
 	if len(def) > 0 {
@@ -169,7 +171,7 @@ func (c *Conf) GetString(key string, def ...string) string {
 	return c.Get(key, v).(string)
 }
 
-// GetInt
+// GetInt returns an int
 func (c *Conf) GetInt(key string, def ...int) int {
 	var v int
 	if len(def) > 0 {
@@ -178,7 +180,7 @@ func (c *Conf) GetInt(key string, def ...int) int {
 	return c.Get(key, v).(int)
 }
 
-// GetInt64
+// GetInt64 returns an int64
 func (c *Conf) GetInt64(key string, def ...int64) int64 {
 	var v int64
 	if len(def) > 0 {
@@ -187,7 +189,7 @@ func (c *Conf) GetInt64(key string, def ...int64) int64 {
 	return c.Get(key, v).(int64)
 }
 
-// GetFloat
+// GetFloat returns an float
 func (c *Conf) GetFloat(key string, def ...float64) float64 {
 	var v float64
 	if len(def) > 0 {
@@ -196,7 +198,7 @@ func (c *Conf) GetFloat(key string, def ...float64) float64 {
 	return c.Get(key, v).(float64)
 }
 
-// GetBool
+// GetBool returns a bool
 func (c *Conf) GetBool(key string, def ...bool) bool {
 	var v bool
 	if len(def) > 0 {
