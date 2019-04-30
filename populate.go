@@ -76,7 +76,7 @@ func (c *Conf) Register(name string, provider interface{}) error {
 	return nil
 }
 
-// Populate pupulate.
+// Populate populate.
 func (c *Conf) Populate(v interface{}, key ...string) (err error) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -157,12 +157,9 @@ func (c *Conf) populate(v, config reflect.Value, key string) error {
 		default:
 			return &ConfigValueError{key, "a map cannot be used to configure " + v.Type().String()}
 		}
-		return c.populateMap(v, config, key)
 	default:
 		return c.populateScalar(v, config, key)
 	}
-
-	return nil
 }
 
 // populateArray

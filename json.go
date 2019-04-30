@@ -11,8 +11,5 @@ func loadJSON(file string, data interface{}) error {
 	if err != nil {
 		return err
 	}
-	if err = json.Unmarshal(bytes, data); err != nil {
-		return err
-	}
-	return nil
+	return json.Unmarshal(bytes, data)
 }

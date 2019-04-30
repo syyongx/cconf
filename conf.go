@@ -14,6 +14,7 @@ type loadFunc func(string, interface{}) error
 
 // DefaultSeparator default separator.
 var DefaultSeparator = "."
+
 // DefaultLoadFuncs default load functions.
 var DefaultLoadFuncs = map[string]loadFunc{"json": loadJSON}
 
