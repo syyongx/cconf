@@ -1,4 +1,4 @@
-# cconf
+# CConf
 [![GoDoc](https://godoc.org/github.com/syyongx/cconf?status.svg)](https://godoc.org/github.com/syyongx/cconf)
 [![Go Report Card](https://goreportcard.com/badge/github.com/syyongx/cconf)](https://goreportcard.com/report/github.com/syyongx/cconf)
 [![MIT licensed][3]][4]
@@ -57,4 +57,4 @@ Populate(v interface{}, key ...string) (err error)
 ```
 
 ## LICENSE
-cconf source code is licensed under the [MIT](https://github.com/syyongx/cconf/blob/master/LICENSE) Licence.
+CConf source code is licensed under the [MIT](https://github.com/syyongx/cconf/blob/master/LICENSE) Licence.
